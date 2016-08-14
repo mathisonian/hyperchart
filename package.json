@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/mathisonian/hyperchart#readme",
   "dependencies": {
-    "ansi-parser": "^3.2.3",
     "posix-cat": "^1.1.1",
     "react": "^15.3.0",
     "temp": "^0.8.3",

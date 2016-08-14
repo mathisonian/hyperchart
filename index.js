@@ -1,10 +1,6 @@
 
 const OUTPUT_HEADER = require('./constants').OUTPUT_HEADER;
-const AnsiParser = require('ansi-parser');
 const fs = require('fs');
-
-const availableCommands = ['line', 'scatter'];
-let totalString = '';
 
 exports.reduceUI = (state, action) => {
   switch (action.type) {
