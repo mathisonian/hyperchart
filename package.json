@@ -1,0 +1,37 @@
+{
+  "name": "hyperchart",
+  "version": "1.0.0",
+  "description": "Charts in hyperterm",
+  "main": "index.js",
+  "bin": {
+    "hyperchart": "bin/hyperchart"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mathisonian/hyperchart.git"
+  },
+  "keywords": [
+    "hyperterm",
+    "data",
+    "data",
+    "viz",
+    "chart",
+    "viz"
+  ],
+  "author": "Matthew Conlen <mc@mathisonian.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mathisonian/hyperchart/issues"
+  },
+  "homepage": "https://github.com/mathisonian/hyperchart#readme",
+  "dependencies": {
+    "ansi-parser": "^3.2.3",
+    "posix-cat": "^1.1.1",
+    "react": "^15.3.0",
+    "temp": "^0.8.3",
+    "victory": "^0.10.4"
+  }
+}

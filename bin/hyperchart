@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const OUTPUT_HEADER = require('../constants').OUTPUT_HEADER;
+const allowedTypes = ['line', 'scatter'];
+const argv = require('yargs').argv;
+const temp = require('temp');
+
+var type;
+Object.keys(argv).forEach((key) => {
+  if (argv[key] && allowedTypes.indexOf(key) > -1) {
+    type = key;
+    delete argv[key];
+  }
+});
+
+if (!type) {
+  console.error('Must provide a valid type. Valid types are: ' + (allowedTypes.join(', ')) + '.');
+  return;
+}
+
+const stream = temp.createWriteStream();
+const cat = require('posix-cat')(argv);
+
+process.stdin.pipe(cat).pipe(stream);
+cat.on('end', function () {
+  stream.end();
+  process.stdout.write(OUTPUT_HEADER + '\n' + JSON.stringify({ path: stream.path, type: type }));
+  process.exit();
+});
