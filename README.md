@@ -11,7 +11,7 @@ charts for hyperterm
 $ npm install -g hyperchart
 ```
 
-and then add `hyperchart` to you `plugins` array in `~/.hyperterm.js`.
+and then add `hyperchart` to your `plugins` array in `~/.hyperterm.js`.
 
 
 
