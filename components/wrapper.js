@@ -1,5 +1,3 @@
-console.log('wrapper');
-
 const Animation = require('victory').VictoryAnimation;
 
 const overlayStyles = {

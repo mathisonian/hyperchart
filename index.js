@@ -3,9 +3,6 @@ const OUTPUT_HEADER = require('./constants').OUTPUT_HEADER;
 const AnsiParser = require('ansi-parser');
 const fs = require('fs');
 
-console.log(require);
-
-
 const availableCommands = ['line', 'scatter'];
 let totalString = '';
 
@@ -35,8 +32,6 @@ exports.mapTermsDispatch = (dispatch, map) => {
 };
 
 exports.getTermProps = (uid, parentProps, props) => {
-  console.log('parent');
-  console.log(parentProps);
   return Object.assign(props, {
     chart: parentProps.chart,
     clearChart: parentProps.clearChart
