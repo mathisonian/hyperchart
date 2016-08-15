@@ -1,7 +1,6 @@
 
 const OUTPUT_HEADER = require('./constants').OUTPUT_HEADER;
 const fs = require('fs');
-const Window = require('hyperterm-window');
 
 exports.reduceUI = (state, action) => {
   switch (action.type) {
@@ -68,6 +67,21 @@ exports.middleware = (store) => (next) => (action) => {
 };
 
 exports.decorateTerm = (Term, { React, notify }) => {
+  try {
+    require('react');
+  } catch(e) {
+    var Module = require('module');
+    var originalRequire = Module.prototype.require;
+    Module.prototype.require = function (path) {
+      if (path === 'react') {
+        return React;
+      }
+      return originalRequire.apply(this, arguments);
+    };
+  }
+
+  const Chart = require('./components/chart')(React);
+  const Window = require('hyperterm-window');
 
   return class extends React.Component {
     render () {
@@ -80,7 +94,7 @@ exports.decorateTerm = (Term, { React, notify }) => {
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor
         }));
-        const hyperwindow = React.createElement(Window, Object.assign({}, this.props, {key: 'window', onClose: this.props.clearChart}), [chart]);
+        const hyperwindow = React.createElement(Window, Object.assign({}, this.props, {key: 'window', onClose: this.props.clearChart}), chart);
         children.push(hyperwindow);
       }
       return React.createElement('div', {style: {width: '100%', height: '100%', position: 'relative'}}, children);
