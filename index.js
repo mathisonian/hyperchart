@@ -1,6 +1,7 @@
 
 const OUTPUT_HEADER = require('./constants').OUTPUT_HEADER;
 const fs = require('fs');
+const Window = require('hyperterm-window');
 
 exports.reduceUI = (state, action) => {
   switch (action.type) {
@@ -68,39 +69,10 @@ exports.middleware = (store) => (next) => (action) => {
 
 exports.decorateTerm = (Term, { React, notify }) => {
 
-  const Wrapper = require('./components/wrapper')(React);
-  const Chart = require('./components/chart')(React);
-  const Close = require('./components/close')(React);
-
   return class extends React.Component {
-
-    constructor(props) {
-      super(props);
-      this.state = {
-        close: false,
-      };
-
-      this.handleMouseEnter = this.handleMouseEnter.bind(this);
-      this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    }
-
-    handleMouseEnter () {
-      this.setState({
-        close: true
-      });
-    }
-
-    handleMouseLeave () {
-      this.setState({
-        close: false
-      });
-    }
-
     render () {
       const { backgroundColor, foregroundColor } = this.props;
-      const children = [React.createElement(Term, Object.assign({}, this.props, {
-        key: 'hyperchart-term'
-      }))];
+      const children = [React.createElement(Term, Object.assign({}, this.props, { key: 'term' }))];
       if (this.props.chart) {
         const chart = React.createElement(Chart, Object.assign({}, this.props.chart, {
           key: 'hyperchart',
@@ -108,12 +80,8 @@ exports.decorateTerm = (Term, { React, notify }) => {
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor
         }));
-        const c = [chart];
-        if (this.state.close) {
-          c.push(React.createElement(Close, {key: 'hyperchart-wrapper-close', onClick: this.props.clearChart, color: foregroundColor}));
-        }
-        const wrapper = React.createElement(Wrapper, {key: 'hyperchart-wrapper', backgroundColor: backgroundColor, foregroundColor: foregroundColor, onMouseEnter: this.handleMouseEnter, onMouseLeave: this.handleMouseLeave}, c);
-        children.push(wrapper);
+        const hyperwindow = React.createElement(Window, Object.assign({}, this.props, {key: 'window', onClose: this.props.clearChart}), [chart]);
+        children.push(hyperwindow);
       }
       return React.createElement('div', {style: {width: '100%', height: '100%', position: 'relative'}}, children);
     }

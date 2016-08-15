@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/mathisonian/hyperchart#readme",
   "dependencies": {
+    "hyperterm-window": "^1.0.1",
     "posix-cat": "^1.1.1",
-    "react": "^15.3.0",
     "temp": "^0.8.3",
     "victory": "^0.10.4"
   }
