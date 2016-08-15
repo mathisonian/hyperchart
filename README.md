@@ -9,7 +9,7 @@ charts for hyperterm. built on [hyperterm-window](https://github.com/mathisonian
 $ npm install -g hyperchart
 ```
 
-to get the command line tool and then add `hyperchart` to your `plugins` array in `~/.hyperterm.js`.
+to get the command line tool and then add `hyperchart` to your `plugins` array in `~/.hyperterm.js`. You'll see a notification popup once the plugin installation happens successfully (give it a few seconds for `npm install` to finish)  
 
 
 ## usage
